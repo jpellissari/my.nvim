@@ -1,0 +1,23 @@
+{
+    "workspace.library": [
+        "/Users/pellissari/.local/share/nvim/site/pack/packer/start/neodev.nvim/types/stable",
+        "/Users/pellissari/neovim/share/nvim/runtime/lua",
+        "/Users/pellissari/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp/lua",
+        "/Users/pellissari/.local/share/nvim/site/pack/packer/start/harpoon/lua",
+        "/Users/pellissari/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim/lua",
+        "/Users/pellissari/.local/share/nvim/site/pack/packer/start/LuaSnip/lua",
+        "/Users/pellissari/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim/lua",
+        "/Users/pellissari/.local/share/nvim/site/pack/packer/start/mason.nvim/lua",
+        "/Users/pellissari/.local/share/nvim/site/pack/packer/start/neodev.nvim/lua",
+        "/Users/pellissari/.local/share/nvim/site/pack/packer/start/nvim-cmp/lua",
+        "/Users/pellissari/.local/share/nvim/site/pack/packer/start/nvim-lspconfig/lua",
+        "/Users/pellissari/.local/share/nvim/site/pack/packer/start/nvim-treesitter/lua",
+        "/Users/pellissari/.local/share/nvim/site/pack/packer/start/packer.nvim/lua",
+        "/Users/pellissari/.local/share/nvim/site/pack/packer/start/plenary.nvim/lua",
+        "/Users/pellissari/.local/share/nvim/site/pack/packer/start/rose-pine/lua",
+        "/Users/pellissari/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua",
+        "/Users/pellissari/.local/share/nvim/site/pack/packer/start/which-key.nvim/lua",
+        "/Users/pellissari/.config/nvim/lua",
+        "${3rd}/luv/library"
+    ]
+}
