@@ -33,3 +33,10 @@ vim.keymap.set({"n", "v"}, "<leader>y", '"+y', { desc = "which_key_ignore" })
 vim.keymap.set({"n", "v"}, "<leader>Y", '"+yg_', { desc = "which_key_ignore" })
 vim.keymap.set({"n", "v"}, "<leader>P", '"+P', { desc = "which_key_ignore" })
 vim.keymap.set({"n", "v"}, "<leader>p", '"+p', { desc = "which_key_ignore" })
+
+-- quickfix list
+vim.keymap.set("n", "]c", vim.cmd.cnext, { desc = "next on quickfix list" })
+vim.keymap.set("n", "[c", vim.cmd.cprev, { desc = "previous on quickfix list" })
+-- location list
+vim.keymap.set("n", "]l", vim.cmd.lnext, { desc = "next on location list" })
+vim.keymap.set("n", "[l", vim.cmd.lprev, { desc = "previous on location list" })
