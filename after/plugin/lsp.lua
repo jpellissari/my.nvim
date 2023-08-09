@@ -33,6 +33,8 @@ lsp.set_sign_icons({
 lsp.on_attach(function(client, bufnr)
   -- see :help lsp-zero-keybindings to learn the available actions
   lsp.default_keymaps({ buffer = bufnr })
+  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "code actions" })
+  vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "rename reference under cursor" })
 end)
 
 -- local lspconfig = require("lspconfig")

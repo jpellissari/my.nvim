@@ -7,5 +7,6 @@ wk.register({
   ["g"] = { name = "+goto" },
   ["<leader>h"] = { name = "+git hunk" },
   ["<leader>s"] = { name = "+search" },
-  ["<leader>q"] = { name = "+quit" }
+  ["<leader>q"] = { name = "+quit" },
+  ["<leader>c"] = { name = "+code" }
 })
