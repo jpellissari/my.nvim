@@ -42,6 +42,13 @@ return require('packer').startup(function(use)
   }
 
   use {
+    "epwalsh/obsidian.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+    },
+  }
+
+  use {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v2.x',
     requires = {
