@@ -40,3 +40,5 @@ vim.keymap.set("n", "<C-k>", vim.cmd.cprev, { desc = "previous on quickfix list"
 -- location list
 vim.keymap.set("n", "]l", vim.cmd.lnext, { desc = "next on location list" })
 vim.keymap.set("n", "[l", vim.cmd.lprev, { desc = "previous on location list" })
+
+vim.keymap.set("n", "<C-f>", "<cmd>!tmux neww tmux-fzfinderness.sh<CR>")
