@@ -26,6 +26,7 @@ return require('packer').startup(function(use)
   use('folke/which-key.nvim')
   use('lewis6991/gitsigns.nvim')
   use('lukas-reineke/indent-blankline.nvim')
+  use { 'machakann/vim-sandwich' }
 
   use {
     'folke/trouble.nvim',
