@@ -1,5 +1,7 @@
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex, { desc = "Tree view" })
 
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
 -- better navigation
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = "which_key_ignore" })
 vim.keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = "which_key_ignore" })
@@ -25,8 +27,15 @@ vim.keymap.set("v", "<", "<gv", { desc = "which_key_ignore" })
 vim.keymap.set("n", "<leader>qq", vim.cmd.qa, { desc = "quit all" })
 
 vim.keymap.set("n", "Q", "<nop>", { desc = "which_key_ignore" })
+
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "format buffer" })
 
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic quickfix list' })
 
 --clipboard
 vim.keymap.set({"n", "v"}, "<leader>y", '"+y', { desc = "which_key_ignore" })
