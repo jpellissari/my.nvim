@@ -1,5 +1,5 @@
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -40,7 +40,6 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80,120"
 
-
 -- Added from kickstart
 vim.opt.breakindent = true
 vim.opt.showmode = false -- remove current mode, since it's already in status line
@@ -53,6 +52,6 @@ vim.opt.smartcase = true
 --  See :help 'list'
 --  and :help 'listchars'
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
-vim.opt.inccommand = 'split' -- substitutions appear in a split
+vim.opt.inccommand = "split" -- substitutions appear in a split

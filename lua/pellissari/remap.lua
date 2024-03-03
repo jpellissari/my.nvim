@@ -4,16 +4,16 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- better navigation
 vim.keymap.set(
-	{ "n", "x" },
-	"j",
-	"v:count == 0 ? 'gj' : 'j'",
-	{ expr = true, silent = true, desc = "which_key_ignore" }
+    { "n", "x" },
+    "j",
+    "v:count == 0 ? 'gj' : 'j'",
+    { expr = true, silent = true, desc = "which_key_ignore" }
 )
 vim.keymap.set(
-	{ "n", "x" },
-	"k",
-	"v:count == 0 ? 'gk' : 'k'",
-	{ expr = true, silent = true, desc = "which_key_ignore" }
+    { "n", "x" },
+    "k",
+    "v:count == 0 ? 'gk' : 'k'",
+    { expr = true, silent = true, desc = "which_key_ignore" }
 )
 -- move line
 vim.keymap.set("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "which_key_ignore" })
@@ -38,7 +38,10 @@ vim.keymap.set("n", "<leader>qq", vim.cmd.qa, { desc = "quit all" })
 
 vim.keymap.set("n", "Q", "<nop>", { desc = "which_key_ignore" })
 
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "format buffer" })
+-- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "format buffer" })
+vim.keymap.set("n", "<leader>f", function()
+    require("conform").format({ lsp_fallback = true })
+end, { desc = "format buffer" })
 
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 

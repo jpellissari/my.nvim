@@ -108,15 +108,11 @@ return require("packer").startup(function(use)
         },
     })
 
-    use({ -- Autoformat
+    use({
         "stevearc/conform.nvim",
         config = function()
             require("conform").setup({
-                notify_on_error = false,
-                format_on_save = {
-                    timeout_ms = 500,
-                    lsp_fallback = true,
-                },
+                notify_on_error = true,
                 formatters_by_ft = {
                     lua = { "stylua" },
                     -- Conform can also run multiple formatters sequentially
@@ -131,14 +127,14 @@ return require("packer").startup(function(use)
         end,
     })
 
-    use({
-        "mfussenegger/nvim-lint",
-        config = function()
-            require("lint").linters_by_ft = {
-                typescript = { "eslint" },
-            }
-        end,
-    })
+    -- use({
+    --     "mfussenegger/nvim-lint",
+    --     config = function()
+    --         require("lint").linters_by_ft = {
+    --             typescript = { "eslint" },
+    --         }
+    --     end,
+    -- })
 
     use({ -- Autocompletion
         "hrsh7th/nvim-cmp",
