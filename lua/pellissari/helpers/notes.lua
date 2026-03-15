@@ -48,4 +48,10 @@ function M.append_inbox(input, is_task)
   }
 end
 
+function M.open_pomodoro()
+  local client = obsidian_client()
+  local note = require('obsidian.note').from_file(client.dir / 'pomodoro.md')
+  client:open_note(note)
+end
+
 return M
