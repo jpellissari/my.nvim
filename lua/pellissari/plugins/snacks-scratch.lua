@@ -12,12 +12,7 @@ return {
           title = 'Focus!!!',
           width = 80,
           height = 0.6,
-          filekey = {
-            id = 'pomo_scratch',
-            cwd = false,
-            branch = false,
-            count = false,
-          },
+          file = vim.fn.expand '~/notes/pomodoro.md',
         }
       end,
       desc = '[N]otes [P]omodoro',

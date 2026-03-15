@@ -106,7 +106,7 @@ return {
 
     local open_inbox = function()
       local ob = require 'obsidian'
-      return ob.get_client().open_note(ob.get_client(), '/Users/pellissari/notes/inbox.md')
+      return ob.get_client().open_note(ob.get_client(), '/Users/pellissari/notes/0 - inbox.md')
     end
     vim.keymap.set('n', '<leader>oi', open_inbox, { desc = 'Open Inbox note' })
   end,
