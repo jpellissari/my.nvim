@@ -36,7 +36,7 @@ stylua lua/
 | `<leader>n` | Notes (snacks-scratch: pomodoro, idea capture, daily capture) |
 | `<leader>o` | Obsidian (today, inbox, switch, search, yesterday) |
 | `<leader>s` | Search (grep, help, diagnostics, LSP symbols, keymaps, notifications, search history) |
-| `<leader>t` | Toggle (blame, deleted hunks, inlay hints) |
+| `<leader>t` | Toggle (blame, deleted hunks, inlay hints, spell) |
 
 **Top-level:** `<leader><space>` smart find, `<leader>,` buffers, `<leader>/` grep, `<leader>e` oil (file manager), `<leader>u` undotree, `<leader>a` harpoon add, `<leader>1-4` harpoon files, `<leader>qq` quit all.
 

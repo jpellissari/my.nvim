@@ -62,6 +62,12 @@ vim.keymap.set('v', '<', '<gv', { desc = 'which_key_ignore' })
 
 vim.keymap.set('n', '<leader>qq', vim.cmd.qa, { desc = 'quit all' })
 
+-- Spellcheck (en_us + pt_br, see options.lua for spelllang)
+-- Native helpers: ]s / [s next/prev misspelling, z= suggestions, zg add word, zw mark wrong
+vim.keymap.set('n', '<leader>ts', function()
+  vim.wo.spell = not vim.wo.spell
+end, { desc = '[T]oggle [s]pell' })
+
 --clipboard
 -- vim.keymap.set({"n", "v"}, "<leader>y", '"+y', { desc = "which_key_ignore" })
 -- vim.keymap.set({"n", "v"}, "<leader>Y", '"+yg_', { desc = "which_key_ignore" })

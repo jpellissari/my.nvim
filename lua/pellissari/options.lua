@@ -75,8 +75,6 @@ vim.opt.scrolloff = 10
 -- See `:help 'confirm'`
 vim.opt.confirm = true
 
-vim.opt.conceallevel = 2
-
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
@@ -88,3 +86,7 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
 vim.opt.undofile = true
+
+-- Spellcheck: en-us + pt-br, off by default (see autocmd.lua for filetype-based enabling)
+vim.opt.spelllang = { 'en_us', 'pt_br' }
+vim.opt.spell = false

@@ -80,11 +80,42 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- markdown-only keymaps
+vim.api.nvim_create_autocmd('FileType', {
+  group = augroup 'markdown_wrap',
+  pattern = 'markdown',
+  callback = function(event)
+    vim.wo.conceallevel = 3
+
+    vim.keymap.set('n', '<leader>tw', function()
+      vim.wo.wrap = not vim.wo.wrap
+    end, { buffer = event.buf, desc = '[T]oggle [w]rap' })
+  end,
+})
+
 vim.api.nvim_create_autocmd('User', {
   pattern = 'OilActionsPost',
   callback = function(event)
     if event.data.actions[1].type == 'move' then
       Snacks.rename.on_rename_file(event.data.actions[1].src_url, event.data.actions[1].dest_url)
     end
+  end,
+})
+
+-- Enable spellcheck (en_us + pt_br) for prose filetypes
+vim.api.nvim_create_autocmd('FileType', {
+  group = augroup 'spell_prose',
+  pattern = { 'markdown', 'gitcommit', 'text' },
+  callback = function()
+    vim.wo.spell = true
+  end,
+})
+
+-- Auto-refresh home.md dashboard when opened
+vim.api.nvim_create_autocmd('BufReadPre', {
+  group = augroup 'notes_home_refresh',
+  pattern = '/home/joaoh/notes/home.md',
+  callback = function()
+    require('pellissari.helpers.notes').refresh_home()
   end,
 })
