@@ -81,7 +81,7 @@ local function land(row, col)
   vim.cmd 'normal! zz'
 end
 
-function M.gf()
+function M.footnote_gf()
   local bufnr = vim.api.nvim_get_current_buf()
   local cursor = vim.api.nvim_win_get_cursor(0)
   local row, col = cursor[1], cursor[2]
