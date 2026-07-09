@@ -9,6 +9,7 @@ local footnote_origin = {}
 local function footnote_matches(line)
   local matches = {}
   local pos = 1
+
   while true do
     local s, e, label = line:find('%[%^([^%]]+)%]', pos)
     if not s then
@@ -17,6 +18,7 @@ local function footnote_matches(line)
     table.insert(matches, { s = s, e = e, label = label, is_def = line:sub(e + 1, e + 1) == ':' })
     pos = e + 1
   end
+
   return matches
 end
 
@@ -36,11 +38,13 @@ end
 ---@return {row: integer, col: integer, label: string, is_def: boolean}[]
 local function all_footnote_matches(bufnr)
   local all = {}
+
   for i, line in ipairs(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)) do
     for _, m in ipairs(footnote_matches(line)) do
       table.insert(all, { row = i, col = m.s - 1, label = m.label, is_def = m.is_def })
     end
   end
+
   return all
 end
 
@@ -53,6 +57,7 @@ local function find_definition(bufnr, label)
       return m
     end
   end
+
   return nil
 end
 
@@ -62,6 +67,7 @@ end
 ---@return {row: integer, col: integer, label: string, is_def: boolean}?
 local function find_reference(bufnr, label, before_row)
   local best_above, first
+
   for _, m in ipairs(all_footnote_matches(bufnr)) do
     if not m.is_def and m.label == label then
       first = first or m
@@ -70,6 +76,7 @@ local function find_reference(bufnr, label, before_row)
       end
     end
   end
+
   return best_above or first
 end
 
