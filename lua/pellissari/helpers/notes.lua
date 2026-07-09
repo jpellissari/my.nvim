@@ -1,5 +1,7 @@
 local M = {}
 
+M.footnote_gf = require('pellissari.helpers.footnotes').footnote_gf
+
 local function obsidian_client()
   require('lazy').load { plugins = { 'obsidian.nvim' } }
   return require('obsidian').get_client()
