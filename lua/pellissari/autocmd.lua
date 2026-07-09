@@ -88,8 +88,12 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.wo.conceallevel = 3
 
     vim.keymap.set('n', '<leader>tw', function()
-      vim.wo.wrap = not vim.wo.wrap
+      local enabled = not vim.wo.wrap
+      vim.wo.wrap = enabled
+      vim.wo.conceallevel = enabled and 3 or 0
     end, { buffer = event.buf, desc = '[T]oggle [w]rap' })
+
+    vim.keymap.set('n', 'gf', require('pellissari.helpers.notes').footnote_gf, { buffer = event.buf, desc = 'Jump to/from footnote' })
   end,
 })
 
@@ -102,20 +106,18 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
+vim.api.nvim_create_autocmd('BufWinLeave', {
+  group = augroup 'autosave_notes',
+  callback = function(event)
+    require('pellissari.helpers.notes').auto_save(event)
+  end,
+})
+
 -- Enable spellcheck (en_us + pt_br) for prose filetypes
 vim.api.nvim_create_autocmd('FileType', {
   group = augroup 'spell_prose',
   pattern = { 'markdown', 'gitcommit', 'text' },
   callback = function()
     vim.wo.spell = true
-  end,
-})
-
--- Auto-refresh home.md dashboard when opened
-vim.api.nvim_create_autocmd('BufReadPre', {
-  group = augroup 'notes_home_refresh',
-  pattern = '/home/joaoh/notes/home.md',
-  callback = function()
-    require('pellissari.helpers.notes').refresh_home()
   end,
 })

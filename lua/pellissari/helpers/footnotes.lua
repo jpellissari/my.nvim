@@ -4,6 +4,7 @@ local M = {}
 ---@type table<string, {row: integer, col: integer}>
 local footnote_origin = {}
 
+--- Find all footnote refs/defs (`[^label]`) in a line.
 ---@param line string
 ---@return {s: integer, e: integer, label: string, is_def: boolean}[]
 local function footnote_matches(line)
@@ -22,6 +23,7 @@ local function footnote_matches(line)
   return matches
 end
 
+--- Footnote match under the cursor column, if any.
 ---@param line string
 ---@param col integer
 ---@return {s: integer, e: integer, label: string, is_def: boolean}?
@@ -34,6 +36,7 @@ local function match_at_col(line, col)
   return nil
 end
 
+--- Find all footnote refs/defs across the buffer.
 ---@param bufnr integer
 ---@return {row: integer, col: integer, label: string, is_def: boolean}[]
 local function all_footnote_matches(bufnr)
@@ -48,6 +51,7 @@ local function all_footnote_matches(bufnr)
   return all
 end
 
+--- Find a footnote's definition line.
 ---@param bufnr integer
 ---@param label string
 ---@return {row: integer, col: integer, label: string, is_def: boolean}?
@@ -61,6 +65,7 @@ local function find_definition(bufnr, label)
   return nil
 end
 
+--- Find the reference nearest above a footnote's definition (or the first one).
 ---@param bufnr integer
 ---@param label string
 ---@param before_row integer
@@ -80,6 +85,7 @@ local function find_reference(bufnr, label, before_row)
   return best_above or first
 end
 
+--- Move the cursor to a location, setting a jump mark.
 ---@param row integer
 ---@param col integer
 local function land(row, col)
@@ -88,6 +94,7 @@ local function land(row, col)
   vim.cmd 'normal! zz'
 end
 
+--- Jump between a footnote reference and its definition (or `gf` otherwise).
 function M.footnote_gf()
   local bufnr = vim.api.nvim_get_current_buf()
   local cursor = vim.api.nvim_win_get_cursor(0)

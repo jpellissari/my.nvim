@@ -12,7 +12,7 @@ return {
           title = 'Focus!!!',
           width = 80,
           height = 0.6,
-          file = vim.fn.expand '~/notes/pomodoro.md',
+          file = require('pellissari.helpers.notes').pomodoro_path(),
         }
       end,
       desc = '[N]otes [P]omodoro',

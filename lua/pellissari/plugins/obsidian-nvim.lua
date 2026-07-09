@@ -12,7 +12,11 @@ return {
       workspaces = {
         {
           name = 'work',
-          path = '/Users/pellissari/notes',
+          path = '/home/joaoh/notes',
+        },
+        {
+          name = 'personal',
+          path = '/home/joaoh/pnotes',
         },
       },
 
@@ -104,10 +108,6 @@ return {
     -- Global keybinding for today's note and inbox
     vim.keymap.set('n', '<leader>ot', '<cmd>ObsidianToday<CR>', { desc = "Open Today's note" })
 
-    local open_inbox = function()
-      local ob = require 'obsidian'
-      return ob.get_client().open_note(ob.get_client(), '/Users/pellissari/notes/0 - inbox.md')
-    end
-    vim.keymap.set('n', '<leader>oi', open_inbox, { desc = 'Open Inbox note' })
+    vim.keymap.set('n', '<leader>oi', require('pellissari.helpers.notes').open_inbox, { desc = 'Open Inbox note' })
   end,
 }
