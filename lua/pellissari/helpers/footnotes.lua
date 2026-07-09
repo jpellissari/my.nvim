@@ -1,10 +1,11 @@
 -- Footnote navigation (any markdown buffer — not vault-specific)
 local M = {}
 
--- "bufnr:label" -> {row, col} origin to return to when jumping back from a definition
+---@type table<string, {row: integer, col: integer}>
 local footnote_origin = {}
 
--- All `[^label]` / `[^label]:` matches on a line, with byte spans and def/ref kind
+---@param line string
+---@return {s: integer, e: integer, label: string, is_def: boolean}[]
 local function footnote_matches(line)
   local matches = {}
   local pos = 1
@@ -19,7 +20,9 @@ local function footnote_matches(line)
   return matches
 end
 
--- Match on `line` whose bracket span contains 0-indexed column `col`, or nil
+---@param line string
+---@param col integer
+---@return {s: integer, e: integer, label: string, is_def: boolean}?
 local function match_at_col(line, col)
   for _, m in ipairs(footnote_matches(line)) do
     if col + 1 >= m.s and col + 1 <= m.e then
@@ -29,7 +32,8 @@ local function match_at_col(line, col)
   return nil
 end
 
--- All footnote matches in the buffer, as {row, col, label, is_def} (row 1-indexed, col 0-indexed)
+---@param bufnr integer
+---@return {row: integer, col: integer, label: string, is_def: boolean}[]
 local function all_footnote_matches(bufnr)
   local all = {}
   for i, line in ipairs(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)) do
@@ -40,6 +44,9 @@ local function all_footnote_matches(bufnr)
   return all
 end
 
+---@param bufnr integer
+---@param label string
+---@return {row: integer, col: integer, label: string, is_def: boolean}?
 local function find_definition(bufnr, label)
   for _, m in ipairs(all_footnote_matches(bufnr)) do
     if m.is_def and m.label == label then
@@ -49,7 +56,10 @@ local function find_definition(bufnr, label)
   return nil
 end
 
--- Nearest reference above `before_row`, else the first occurrence in the buffer
+---@param bufnr integer
+---@param label string
+---@param before_row integer
+---@return {row: integer, col: integer, label: string, is_def: boolean}?
 local function find_reference(bufnr, label, before_row)
   local best_above, first
   for _, m in ipairs(all_footnote_matches(bufnr)) do
@@ -63,13 +73,14 @@ local function find_reference(bufnr, label, before_row)
   return best_above or first
 end
 
+---@param row integer
+---@param col integer
 local function land(row, col)
   vim.cmd "normal! m'"
   vim.api.nvim_win_set_cursor(0, { row, col })
   vim.cmd 'normal! zz'
 end
 
--- `gf` on a footnote reference/definition jumps to its counterpart; otherwise passes through to native gf
 function M.gf()
   local bufnr = vim.api.nvim_get_current_buf()
   local cursor = vim.api.nvim_win_get_cursor(0)
