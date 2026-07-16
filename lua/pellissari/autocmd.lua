@@ -113,6 +113,34 @@ vim.api.nvim_create_autocmd('BufWinLeave', {
   end,
 })
 
+-- Persist folds across close/reopen (mkview/loadview), skip special buffers
+local view_group = augroup 'persistent_folds'
+
+vim.api.nvim_create_autocmd({ 'BufWinLeave', 'BufWritePost' }, {
+  group = view_group,
+  pattern = '?*',
+  callback = function(event)
+    if vim.bo[event.buf].buftype == '' and vim.bo[event.buf].buflisted then
+      vim.cmd 'silent! mkview'
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  group = view_group,
+  pattern = '?*',
+  callback = function(event)
+    if vim.bo[event.buf].buftype == '' and vim.bo[event.buf].buflisted then
+      -- defer: ufo computes folds asynchronously and would clobber loadview otherwise
+      vim.defer_fn(function()
+        if vim.api.nvim_buf_is_valid(event.buf) then
+          vim.cmd 'silent! loadview'
+        end
+      end, 100)
+    end
+  end,
+})
+
 -- Enable spellcheck (en_us + pt_br) for prose filetypes
 vim.api.nvim_create_autocmd('FileType', {
   group = augroup 'spell_prose',
