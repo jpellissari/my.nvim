@@ -68,6 +68,13 @@ return {
         end,
         desc = '[N]otes [T]ask/today',
       },
+      {
+        '<leader>nh',
+        function()
+          require('pellissari.helpers.notes').open_note 'home.md'
+        end,
+        desc = '[N]otes [H]ome (dashboard)',
+      },
     },
   },
 }

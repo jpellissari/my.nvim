@@ -106,8 +106,8 @@ return {
     }
 
     -- Global keybinding for today's note and inbox
-    vim.keymap.set('n', '<leader>ot', '<cmd>ObsidianToday<CR>', { desc = "Open Today's note" })
+    -- vim.keymap.set('n', '<leader>ot', '<cmd>ObsidianToday<CR>', { desc = "Open Today's note" })
 
-    vim.keymap.set('n', '<leader>oi', require('pellissari.helpers.notes').open_inbox, { desc = 'Open Inbox note' })
+    -- vim.keymap.set('n', '<leader>oi', require('pellissari.helpers.notes').open_inbox, { desc = 'Open Inbox note' })
   end,
 }

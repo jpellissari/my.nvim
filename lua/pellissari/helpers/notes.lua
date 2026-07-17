@@ -2,8 +2,26 @@ local M = {}
 
 M.footnote_gf = require('pellissari.helpers.footnotes').footnote_gf
 
+local NOTES_PATH = '~/notes'
 local INBOX_PATH = 'inbox.md'
+local SPRINT_PATH = 'sprint.md'
 local POMODORO_PATH = 'pomodoro.md'
+
+local notes_dir_cache
+
+--- Get expanded notes dir (cached, path never changes at runtime)
+--- @return string
+local function get_notes_dir()
+  notes_dir_cache = notes_dir_cache or vim.fn.expand(NOTES_PATH)
+  return notes_dir_cache
+end
+
+--- Resolve a note's absolute path from a path relative to the notes dir
+--- @param relative_path string
+--- @return string
+local function resolve_note_path(relative_path)
+  return vim.fs.joinpath(get_notes_dir(), relative_path)
+end
 
 --- Return the active obsidian client, asserting one exists.
 ---@return table
@@ -26,7 +44,7 @@ local function autosave_paths()
   return {
     tostring(get_note(INBOX_PATH).path),
     tostring(get_note(POMODORO_PATH).path),
-    tostring(get_client():today().path),
+    tostring(get_note(SPRINT_PATH).path),
   }
 end
 
@@ -87,13 +105,18 @@ function M.open_note(relative_path)
 end
 
 --- Open the inbox note.
-function M.open_inbox()
-  M.open_note(INBOX_PATH)
+function M.get_inbox_path()
+  return resolve_note_path(INBOX_PATH)
+end
+
+--- Open the sprint note.
+function M.get_sprint_path()
+  return resolve_note_path(SPRINT_PATH)
 end
 
 --- Open the pomodoro note.
-function M.open_pomodoro()
-  M.open_note(POMODORO_PATH)
+function M.get_pomodoro_path()
+  return resolve_note_path(POMODORO_PATH)
 end
 
 --- Absolute path of the pomodoro note.
