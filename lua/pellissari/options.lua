@@ -35,6 +35,9 @@ end)
 -- Enable break indent
 vim.opt.breakindent = true
 
+-- Soft-wrap only at word boundaries, never mid-word
+vim.opt.linebreak = true
+
 -- Save undo history
 vim.opt.undofile = true
 
