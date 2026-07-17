@@ -25,9 +25,19 @@ return {
       enabled = true,
       win = {
         width = 100,
+        backdrop = { blend = 20 },
       },
     },
   },
+  config = function(_, opts)
+    require('snacks').setup(opts)
+
+    -- overlay2 (Catppuccin Macchiato), matches render-markdown.lua's muted elements
+    vim.api.nvim_set_hl(0, 'PellissariWrapMark', { fg = '#6e738d' })
+
+    -- override after Snacks sets its own, to mark soft-wrap continuation lines
+    vim.o.statuscolumn = "%!v:lua.require'pellissari.helpers.statuscolumn'.get()"
+  end,
   keys = {
     -- top-level
     { '<leader><space>', function() Snacks.picker.smart() end, desc = 'Smart Find Files' },
