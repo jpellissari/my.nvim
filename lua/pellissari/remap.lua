@@ -69,8 +69,8 @@ vim.keymap.set('n', '<leader>ts', function()
 end, { desc = '[T]oggle [s]pell' })
 
 --clipboard
+vim.keymap.set('n', '<leader>yp', ':let @+ = expand("%:p")<CR>', { desc = 'Yank abs path' })
 -- vim.keymap.set({"n", "v"}, "<leader>y", '"+y', { desc = "which_key_ignore" })
 -- vim.keymap.set({"n", "v"}, "<leader>Y", '"+yg_', { desc = "which_key_ignore" })
 -- vim.keymap.set({"n", "v"}, "<leader>P", '"+P', { desc = "which_key_ignore" })
 -- vim.keymap.set({"n", "v"}, "<leader>p", '"+p', { desc = "which_key_ignore" })
-
