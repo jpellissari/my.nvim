@@ -12,27 +12,25 @@ return {
       workspaces = {
         {
           name = 'work',
-          path = '/home/joaoh/notes',
-        },
-        {
-          name = 'personal',
-          path = '/home/joaoh/pnotes',
+          path = '/Users/pellissari/notes',
         },
       },
 
       ui = { enable = false }, -- Disable UI favoring render-markdown
 
-      daily_notes = {
-        folder = '/periodic/daily',
-        date_format = '%Y-%m-%d',
-        alias_format = '%B %-d, %Y',
-        default_tags = { 'daily-notes' },
-        -- template = 'daily.md',
-      },
+      -- daily_notes = {
+      --   folder = '/periodic/daily',
+      --   date_format = '%Y-%m-%d',
+      --   alias_format = '%B %-d, %Y',
+      --   default_tags = { 'daily-notes' },
+      --   template = 'daily.md',
+      -- },
+
       completion = {
         nvim_cmp = true,
         min_chars = 2,
       },
+
       mappings = {
         -- Buffer-local mappings (only available in vault notes)
         -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
@@ -55,11 +53,6 @@ return {
             return require('obsidian').util.smart_action()
           end,
           opts = { buffer = true, expr = true },
-        },
-
-        ['<leader>oy'] = {
-          action = '<cmd>ObsidianYesterday<CR>',
-          opts = { desc = 'Open yesterday', buffer = true },
         },
 
         ['<leader>oo'] = {
@@ -92,22 +85,17 @@ return {
       -- This will keep links as [[Foo bar]]
       wiki_link_func = 'use_alias_only',
 
-      templates = {
-        folder = 'templates',
-        date_format = '%Y-%m-%d',
-        time_format = '%H:%M',
-        -- A map for custom variables, the key should be the variable and the value a function
-        substitutions = {
-          long_date = function()
-            return os.date '%A - %B %d, %Y'
-          end,
-        },
-      },
+      -- templates = {
+      --   folder = 'templates',
+      --   date_format = '%Y-%m-%d',
+      --   time_format = '%H:%M',
+      --   -- A map for custom variables, the key should be the variable and the value a function
+      --   substitutions = {
+      --     long_date = function()
+      --       return os.date '%A - %B %d, %Y'
+      --     end,
+      --   },
+      -- },
     }
-
-    -- Global keybinding for today's note and inbox
-    -- vim.keymap.set('n', '<leader>ot', '<cmd>ObsidianToday<CR>', { desc = "Open Today's note" })
-
-    -- vim.keymap.set('n', '<leader>oi', require('pellissari.helpers.notes').open_inbox, { desc = 'Open Inbox note' })
   end,
 }

@@ -2,6 +2,10 @@ local function augroup(name)
   return vim.api.nvim_create_augroup('pellissari_' .. name, { clear = true })
 end
 
+-- eager load: registers the :Notes user command needed by `nvim -c 'Notes ...'` invocations
+-- (e.g. from tmux), which happen before any FileType/BufWinLeave autocmd would fire it lazily
+require 'pellissari.helpers.notes'
+
 --  See `:help lua-guide-autocommands`
 
 -- Highlight when yanking (copying) text
@@ -100,8 +104,9 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('User', {
   pattern = 'OilActionsPost',
   callback = function(event)
-    if event.data.actions[1].type == 'move' then
-      Snacks.rename.on_rename_file(event.data.actions[1].src_url, event.data.actions[1].dest_url)
+    local action = event.data.actions[1]
+    if action and action.type == 'move' then
+      Snacks.rename.on_rename_file(action.src_url, action.dest_url)
     end
   end,
 })

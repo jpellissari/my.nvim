@@ -91,5 +91,5 @@ vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
 vim.opt.undofile = true
 
 -- Spellcheck: en-us + pt-br, off by default (see autocmd.lua for filetype-based enabling)
-vim.opt.spelllang = { 'en_us', 'pt_br' }
+vim.opt.spelllang = { 'en_us', 'pt-br' }
 vim.opt.spell = false

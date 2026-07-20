@@ -70,7 +70,8 @@ end, { desc = '[T]oggle [s]pell' })
 
 --clipboard
 vim.keymap.set('n', '<leader>yp', ':let @+ = expand("%:p")<CR>', { desc = 'Yank abs path' })
--- vim.keymap.set({"n", "v"}, "<leader>y", '"+y', { desc = "which_key_ignore" })
--- vim.keymap.set({"n", "v"}, "<leader>Y", '"+yg_', { desc = "which_key_ignore" })
--- vim.keymap.set({"n", "v"}, "<leader>P", '"+P', { desc = "which_key_ignore" })
--- vim.keymap.set({"n", "v"}, "<leader>p", '"+p', { desc = "which_key_ignore" })
+
+--notes
+vim.keymap.set('n', '<leader>I', '<cmd>Notes inbox<CR>', { desc = 'Open Inbox' })
+vim.keymap.set('n', '<leader>W', '<cmd>Notes worklog<CR>', { desc = 'Open Work Log' })
+vim.keymap.set('n', '<leader>F', '<cmd>Notes focus<CR>', { desc = 'Open Focus' })

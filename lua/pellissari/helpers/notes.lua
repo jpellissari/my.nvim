@@ -3,9 +3,9 @@ local M = {}
 M.footnote_gf = require('pellissari.helpers.footnotes').footnote_gf
 
 local NOTES_PATH = '~/notes'
-local INBOX_PATH = 'inbox.md'
-local SPRINT_PATH = 'sprint.md'
-local POMODORO_PATH = 'pomodoro.md'
+local INBOX_PATH = '00_INBOX.md'
+local WORK_LOG_PATH = '00_WORK_LOG.md'
+local CURRENT_FOCUS_PATH = '00_CURRENT_FOCUS.md'
 
 local notes_dir_cache
 
@@ -43,8 +43,8 @@ end
 local function autosave_paths()
   return {
     tostring(get_note(INBOX_PATH).path),
-    tostring(get_note(POMODORO_PATH).path),
-    tostring(get_note(SPRINT_PATH).path),
+    tostring(get_note(CURRENT_FOCUS_PATH).path),
+    tostring(get_note(WORK_LOG_PATH).path),
   }
 end
 
@@ -97,33 +97,28 @@ function M.append_inbox(input, is_task)
   append_line(get_note(INBOX_PATH), text)
 end
 
---- Open a note by filename relative to the vault.
----@param relative_path string
-function M.open_note(relative_path)
-  local note = get_note(relative_path)
-  get_client():open_note(note)
+--- Open a known note by name. See :Notes completion for valid names.
+---@param name string
+local function open_named_note(name)
+  local targets = {
+    inbox = INBOX_PATH,
+    worklog = WORK_LOG_PATH,
+    focus = CURRENT_FOCUS_PATH,
+    home = 'home.md',
+  }
+  local relative_path = targets[name]
+  assert(relative_path, 'unknown note: ' .. tostring(name))
+  vim.cmd.edit(resolve_note_path(relative_path))
 end
 
---- Open the inbox note.
-function M.get_inbox_path()
-  return resolve_note_path(INBOX_PATH)
-end
-
---- Open the sprint note.
-function M.get_sprint_path()
-  return resolve_note_path(SPRINT_PATH)
-end
-
---- Open the pomodoro note.
-function M.get_pomodoro_path()
-  return resolve_note_path(POMODORO_PATH)
-end
-
---- Absolute path of the pomodoro note.
----@return string
-function M.pomodoro_path()
-  return tostring(get_note(POMODORO_PATH).path)
-end
+vim.api.nvim_create_user_command('Notes', function(cmd_opts)
+  open_named_note(cmd_opts.args)
+end, {
+  nargs = 1,
+  complete = function()
+    return { 'inbox', 'worklog', 'focus', 'home' }
+  end,
+})
 
 --- Save the buffer if it's a tracked note and has unsaved changes.
 ---@param event table
