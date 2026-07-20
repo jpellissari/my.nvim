@@ -12,7 +12,7 @@ return {
       workspaces = {
         {
           name = 'work',
-          path = '/Users/pellissari/notes',
+          path = '/home/joaoh/notes',
         },
       },
 
